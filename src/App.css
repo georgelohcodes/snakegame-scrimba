@@ -29,3 +29,7 @@ body {
 .snake-head {
   background-color: red;
 }
+
+.apple {
+  background-color: blue;
+}

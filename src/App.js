@@ -1,7 +1,8 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 
-const width = 10;
+const width = 10; // num of grid in one row
+
 const squares = [];
 for (let i = 0; i < 100; i++) {
   squares.push(i);
@@ -11,12 +12,16 @@ function App() {
   const [gridItems, setGridItems] = useState(() => squares);
   const [direction, setDirection] = useState(1);
   const [snakePosition, setSnakePosition] = useState([2, 1, 0]);
+  const [applePosition, setApplePosition] = useState(5);
+  const [speed, setSpeed] = useState(() => 750);
 
   const [gameStart, setGameStart] = useState(true);
 
+  console.log(snakePosition);
+
   useEffect(() => {
     if (gameStart) {
-      const interval = setInterval(() => move(), 1000);
+      const interval = setInterval(() => move(), speed);
       return () => clearInterval(interval);
     }
   });
@@ -25,6 +30,10 @@ function App() {
     const dom = document.addEventListener("keydown", changeDirection);
     return () => dom.removeEventListener("keydown", changeDirection);
   }, []);
+
+  useEffect(() => {
+    checkAppleAte();
+  }, [snakePosition]);
 
   function move() {
     // make copy
@@ -67,6 +76,15 @@ function App() {
       case 40: // down
         setDirection(width);
         break;
+      default:
+        break;
+    }
+  }
+
+  function checkAppleAte() {
+    if (snakePosition[0] === applePosition) {
+      setSnakePosition([...snakePosition, snakePosition[-1] + direction]);
+      setApplePosition(Math.floor(Math.random() * 100));
     }
   }
 
@@ -84,7 +102,8 @@ function App() {
           <div
             className={`square ${
               snakePosition.includes(item) ? "snake-body" : ""
-            } ${snakePosition[0] === item ? "snake-head" : ""}`}
+            } ${snakePosition[0] === item ? "snake-head" : ""}
+            ${applePosition === item ? "apple" : ""}`}
           ></div>
         ))}
       </div>
