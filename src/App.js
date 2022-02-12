@@ -81,6 +81,7 @@ function App() {
   }
 
   function changeDirection(e) {
+    e.preventDefault();
     switch (e.keyCode) {
       case 37: // left
         setDirection(-1);
@@ -134,6 +135,8 @@ function App() {
       <h1>Snake Game</h1>
       <h3>Use up, down, left, right arrows to move</h3>
 
+      {!gameStart && highScore > 0 && <h2> Game Over! </h2>}
+
       {!gameStart && (
         <select
           name="difficulty"
@@ -146,7 +149,6 @@ function App() {
         </select>
       )}
 
-      {!gameStart && highScore > 0 && <h2> Game Over! </h2>}
       {!gameStart && (
         <button onClick={() => resetGame()}>
           {highScore > 0 ? "Reset Game" : "Start Game"}
