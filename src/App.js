@@ -10,14 +10,15 @@ for (let i = 0; i < 100; i++) {
 
 function App() {
   const [gridItems, setGridItems] = useState(() => squares);
+  const [speed, setSpeed] = useState(() => 750);
+
   const [direction, setDirection] = useState(1);
   const [snakePosition, setSnakePosition] = useState([2, 1, 0]);
   const [applePosition, setApplePosition] = useState(5);
-  const [speed, setSpeed] = useState(() => 750);
 
-  const [gameStart, setGameStart] = useState(true);
-
-  console.log(snakePosition);
+  const [gameStart, setGameStart] = useState(false);
+  const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
 
   useEffect(() => {
     if (gameStart) {
@@ -58,8 +59,19 @@ function App() {
     ) {
       console.log("Touched a wall!");
       setGameStart(false);
+      if (score > highScore) {
+        setHighScore(score);
+      }
       return true;
     }
+  }
+
+  function resetGame() {
+    setSnakePosition([2, 1, 0]);
+    setApplePosition(5);
+    setDirection(1);
+    setScore(0);
+    setGameStart(true);
   }
 
   function changeDirection(e) {
@@ -85,6 +97,7 @@ function App() {
     if (snakePosition[0] === applePosition) {
       setSnakePosition([...snakePosition, snakePosition[-1] + direction]);
       setApplePosition(Math.floor(Math.random() * 100));
+      setScore((prev) => prev + 1);
     }
   }
 
@@ -97,6 +110,16 @@ function App() {
 
   return (
     <div className="App">
+      <h1>Snake Game</h1>
+      <h3>Use up, down, left, right arrows to move</h3>
+      {!gameStart && highScore > 0 && <h2> Game Over! </h2>}
+      {!gameStart && (
+        <button onClick={() => resetGame()}>
+          {highScore > 0 ? "Reset Game" : "Start Game"}
+        </button>
+      )}
+      <h2>High Score : {highScore}</h2>
+      <h2>Score: {score}</h2>
       <div className="grid">
         {gridItems.map((item) => (
           <div
