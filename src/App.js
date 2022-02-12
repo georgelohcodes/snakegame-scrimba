@@ -11,6 +11,7 @@ for (let i = 0; i < 100; i++) {
 function App() {
   const [gridItems, setGridItems] = useState(() => squares);
   const [speed, setSpeed] = useState(() => 750);
+  const [difficulty, setDifficulty] = useState("normal");
 
   const [direction, setDirection] = useState(1);
   const [snakePosition, setSnakePosition] = useState([2, 1, 0]);
@@ -35,6 +36,11 @@ function App() {
   useEffect(() => {
     checkAppleAte();
   }, [snakePosition]);
+
+  useEffect(() => {
+    // change speed when difficulty is changed
+    selectDifficulty();
+  }, [difficulty]);
 
   function move() {
     // make copy
@@ -101,10 +107,25 @@ function App() {
     }
   }
 
+  function selectDifficulty() {
+    switch (difficulty) {
+      case "easy":
+        setSpeed(750);
+        break;
+      case "normal":
+        setSpeed(500);
+        break;
+      case "hard":
+        setSpeed(350);
+        break;
+      default:
+        break;
+    }
+  }
+
   // helper functions
   function hasDuplicates(a) {
     const noDups = new Set(a);
-
     return a.length !== noDups.size;
   }
 
@@ -112,14 +133,29 @@ function App() {
     <div className="App">
       <h1>Snake Game</h1>
       <h3>Use up, down, left, right arrows to move</h3>
+
+      {!gameStart && (
+        <select
+          name="difficulty"
+          value={difficulty}
+          onChange={(e) => setDifficulty(e.target.value)}
+        >
+          <option value="easy">Easy</option>
+          <option value="normal">Normal</option>
+          <option value="hard">Hard</option>
+        </select>
+      )}
+
       {!gameStart && highScore > 0 && <h2> Game Over! </h2>}
       {!gameStart && (
         <button onClick={() => resetGame()}>
           {highScore > 0 ? "Reset Game" : "Start Game"}
         </button>
       )}
+
       <h2>High Score : {highScore}</h2>
       <h2>Score: {score}</h2>
+
       <div className="grid">
         {gridItems.map((item) => (
           <div
