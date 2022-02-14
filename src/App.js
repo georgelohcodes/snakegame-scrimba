@@ -138,25 +138,27 @@ function App() {
       {!gameStart && highScore > 0 && <h2> Game Over! </h2>}
 
       {!gameStart && (
-        <select
-          name="difficulty"
-          value={difficulty}
-          onChange={(e) => setDifficulty(e.target.value)}
-        >
-          <option value="easy">Easy</option>
-          <option value="normal">Normal</option>
-          <option value="hard">Hard</option>
-        </select>
+        <div className="difficulty">
+          <select
+            name="difficulty"
+            value={difficulty}
+            onChange={(e) => setDifficulty(e.target.value)}
+          >
+            <option value="easy">Easy</option>
+            <option value="normal">Normal</option>
+            <option value="hard">Hard</option>
+          </select>
+
+          <button onClick={() => resetGame()}>
+            {highScore > 0 ? "Reset Game" : "Start Game"}
+          </button>
+        </div>
       )}
 
-      {!gameStart && (
-        <button onClick={() => resetGame()}>
-          {highScore > 0 ? "Reset Game" : "Start Game"}
-        </button>
-      )}
-
-      <h2>High Score : {highScore}</h2>
-      <h2>Score: {score}</h2>
+      <div className="score">
+        <h2>High Score : {highScore}</h2>
+        <h2>Score: {score}</h2>
+      </div>
 
       <div className="grid">
         {gridItems.map((item) => (
