@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/snakegame-scrimba/static/css/main.1303ff98.css",
-    "main.js": "/snakegame-scrimba/static/js/main.35131cab.js",
+    "main.css": "/snakegame-scrimba/static/css/main.1b2172d1.css",
+    "main.js": "/snakegame-scrimba/static/js/main.7cfebb77.js",
     "index.html": "/snakegame-scrimba/index.html",
-    "main.1303ff98.css.map": "/snakegame-scrimba/static/css/main.1303ff98.css.map",
-    "main.35131cab.js.map": "/snakegame-scrimba/static/js/main.35131cab.js.map"
+    "main.1b2172d1.css.map": "/snakegame-scrimba/static/css/main.1b2172d1.css.map",
+    "main.7cfebb77.js.map": "/snakegame-scrimba/static/js/main.7cfebb77.js.map"
   },
   "entrypoints": [
-    "static/css/main.1303ff98.css",
-    "static/js/main.35131cab.js"
+    "static/css/main.1b2172d1.css",
+    "static/js/main.7cfebb77.js"
   ]
 }
