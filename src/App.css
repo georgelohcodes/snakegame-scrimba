@@ -36,34 +36,35 @@ body {
 }
 
 h1 {
-  margin: 0.25rem auto;
+  margin: 0.25em auto;
 }
 
 .score {
-  margin-top: 1rem;
+  margin-top: 1em;
 }
 
 h3 {
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 1em;
 }
 
 .difficulty {
-  padding: 0.5rem;
+  padding: 0.5em;
 }
 
 .difficulty select {
-  padding: 0.5rem;
+  padding: 0.5em;
   font-size: 1.5rem;
 }
 
 .difficulty button {
-  padding: 0.5rem 1rem;
+  padding: 0.5em 1em;
   font-size: 1.5rem;
   color: white;
   background-color: #0d6efd;
 }
 
 select {
-  margin-right: 0.5rem;
+  margin-right: 0.5em;
+  margin-left: 0;
 }
